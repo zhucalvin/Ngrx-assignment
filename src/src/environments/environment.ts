@@ -3,7 +3,21 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  // API settings
+  api: {
+    url: 'https://random-data-api.com/api/',
+    retryCount: 0
+  },
+
+  // Application Settings
+  application: {
+    appHeaderTitle: 'Coffee Shop',
+    localStorageToken: 'Coffee-Shop-dev',
+    maxProducts: 50,
+    productsPerPage: 10
+  }
 };
 
 /*
