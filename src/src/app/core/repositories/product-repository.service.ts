@@ -18,7 +18,6 @@ export class ProductRepositoryService {
   retrieveAllCoffeeProducts(): Observable<Coffee[]> {
     let headers = new HttpHeaders();
     const url = `${this._env.api.url}/coffee/random_coffee?size=${this._env.application.maxProducts}`;
-    console.log(url);
 
     return this.http.get<Coffee[]>(url, { headers: headers })
     .pipe(
