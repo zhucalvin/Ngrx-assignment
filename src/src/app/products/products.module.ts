@@ -8,10 +8,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from '../core/effects';
 import * as fromProducts from '../core/reducers';
 import { SharedModule } from '../shared/shared.module';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
-    ProductListComponent
+    ProductListComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
