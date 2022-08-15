@@ -16,16 +16,16 @@ import * as fromProducts from './products.reducer'
 
 export const productsModuleFeatureKey = 'productsModule';
 
-export interface State {
+export interface ProductState {
     [fromProducts.productsFeatureKey]: fromProducts.State;
 }
 
 export interface State extends fromRoot.State {
-    [productsModuleFeatureKey]: State;
+    [productsModuleFeatureKey]: ProductState;
 }
 
 /** Provide reducer in AoT-compilation happy way */
-export function reducers(state: State | undefined, action: Action) {
+export function reducers(state: ProductState | undefined, action: Action) {
     return combineReducers({
       [fromProducts.productsFeatureKey]: fromProducts.productsReducer,
     })(state, action);
@@ -34,7 +34,7 @@ export function reducers(state: State | undefined, action: Action) {
 export const selectProductsModuleState =
   createFeatureSelector<State>(productsModuleFeatureKey);
 
- export const selectProductsState = createSelector(
-    selectProductsModuleState,
-    () => fromProducts.getProducts
-  );
+export const selectProducts = createSelector(
+  selectProductsModuleState,
+  (state) => state[fromProducts.productsFeatureKey].products
+);
