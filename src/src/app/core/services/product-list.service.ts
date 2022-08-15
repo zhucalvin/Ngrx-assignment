@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import * as fromProducts from '../../core/reducers';
-import { ProductsActions } from '../actions';
+import { ProductsActions, PaginationActions } from '../actions';
 import { Coffee, CustomSettings } from '../models';
 
 @Injectable({
@@ -12,18 +12,15 @@ import { Coffee, CustomSettings } from '../models';
 })
 export class ProductListService {
 
-  private _currentPageNumber: BehaviorSubject<number>; 
   private productsGridState: {
     pageSize: number,
-    currentPageNumber: number
     pageStart: number
   };
 
   private _env: CustomSettings;
   constructor(private store: Store<fromProducts.State>) {
     this._env = environment as CustomSettings;
-    this._currentPageNumber = <BehaviorSubject<number>>new BehaviorSubject(1);
-    this.productsGridState = { pageSize: this._env.application.productsPerPage, currentPageNumber: 1, pageStart: 0 }
+    this.productsGridState = { pageSize: this._env.application.productsPerPage, pageStart: 0 }
   }
 
   get onePageProducts() {
@@ -31,7 +28,7 @@ export class ProductListService {
   }
 
   get currentPageNumber() {
-    return this._currentPageNumber.asObservable();
+    return this.store.pipe(select(fromProducts.selectCurrentPageNumber));
   }
 
   get maxPageNumber() {
@@ -43,21 +40,14 @@ export class ProductListService {
   }  
 
   prevPage() {
-    if (this.productsGridState.currentPageNumber > 1) {
-      this.productsGridState.currentPageNumber --;
-      this._currentPageNumber.next(Object.assign({}, this.productsGridState).currentPageNumber);
-    }
+    this.store.dispatch(PaginationActions.previousPage());
   }
 
   nextPage() {
-    if (this.productsGridState.currentPageNumber < this.maxPageNumber) {
-      this.productsGridState.currentPageNumber ++;
-      this._currentPageNumber.next(Object.assign({}, this.productsGridState).currentPageNumber);
-    }
+    this.store.dispatch(PaginationActions.nextPage());
   }
 
   navigateTo(pageNum: number) {
-    this.productsGridState.currentPageNumber = pageNum;
-    this._currentPageNumber.next(Object.assign({}, this.productsGridState).currentPageNumber);
+    this.store.dispatch(PaginationActions.navigateTo({id: pageNum}));
   }
 }
