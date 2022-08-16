@@ -16,17 +16,8 @@ export class ProductListComponent implements OnInit {
   public page: number = 1;
   public count: number = 0;
   public tableSize: number = 10;
-  public tableSizes: any = [5, 10, 15, 20];
   
-  retrievedProducts$: Observable<Coffee[]>;
-  currentPageNumber$: Observable<number>;
-  public maxPageNumber: number;
-
-  constructor(private prodService: ProductListService) {   
-    this.retrievedProducts$ = this.prodService.onePageProducts;
-    this.currentPageNumber$ = this.prodService.currentPageNumber;
-    this.maxPageNumber = this.prodService.maxPageNumber;
-  }
+  constructor(private prodService: ProductListService) {   }
 
   ngOnInit(): void {
     this.retrieveList();
