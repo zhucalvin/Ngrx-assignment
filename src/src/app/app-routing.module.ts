@@ -5,7 +5,11 @@ import { HomeComponent } from './public';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-
+  {
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  },
+  
   // otherwise redirect to main page
   { path: '**', redirectTo: 'home' }
 ];

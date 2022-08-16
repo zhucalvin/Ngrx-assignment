@@ -1,0 +1,36 @@
+<app-page-header [pageHeader]="pageHeader"></app-page-header>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped table-hover">
+            <thead class="table-secondary">
+                <tr>
+                    <td>Id</td>
+                    <td>Blend</td>
+                    <td>Origin</td>
+                    <td>Variety</td>
+                    <td>Intensifier</td>
+                    <td>Notes</td>
+                </tr>    
+            </thead>
+            <tbody>
+                <tr class="clickable" (click)="openDetailPopup(product.id)" *ngFor='let product of productList | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: count } '>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.blend_name }}</td>
+                    <td>{{ product.origin }}</td>
+                    <td>{{ product.variety }}</td>
+                    <td>{{ product.intensifier }}</td>
+                    <td>{{ product.notes }}</td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <pagination-controls
+        previousLabel=""
+        nextLabel = ""
+        (pageChange) = "onTableDataChange($event)"
+        ></pagination-controls>
+    </div>
+</div>
