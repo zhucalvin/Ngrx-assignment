@@ -1,9 +1,9 @@
-export interface Coffee {
-    id: number;
-    uid: string;
-    blend_name: string;
-    origin: string;
-    variety: string;
-    notes: string;
-    intensifier: string;
+export class Coffee {
+    id: number = 0;
+    uid: string = '';
+    blend_name: string = '';
+    origin: string = '';
+    variety: string = '';
+    notes: string = '';
+    intensifier: string = '';
 }

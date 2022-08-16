@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Coffee, PageHeader } from 'src/app/core/models';
-import { ProductListService } from 'src/app/core/services';
+import { ProductDetailService, ProductListService } from 'src/app/core/services';
 import { environment } from 'src/environments/environment';
 import { CustomSettings } from '../../core/models';
 
@@ -19,7 +19,8 @@ export class ProductListComponent implements OnInit {
   public tableSize: number = 0;
   
   private _env: CustomSettings;
-  constructor(private prodService: ProductListService) {  
+  constructor(private prodService: ProductListService,
+              private detailService: ProductDetailService) {  
     this._env = environment as CustomSettings;
     this.tableSize = this._env.application.productsPerPage;
    }
@@ -30,11 +31,22 @@ export class ProductListComponent implements OnInit {
   }
 
   retrieveList(): void {
-    this.prodService.onePageProducts.subscribe(
+    this.prodService.allProducts.subscribe(
       (products) => {
         this.productList = products;
       }
     );
+  }
+
+  findProdcutById(id: number): Coffee | undefined {
+    return this.productList.find(product => product.id === id);
+  }
+
+  openDetailPopup(id: number) {
+    let curProd = this.findProdcutById(id);
+    if (curProd !== undefined && curProd) {
+      this.detailService.open(curProd);
+    }
   }
 
   onTableDataChange(event: any) {

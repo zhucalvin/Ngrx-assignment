@@ -19,13 +19,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HomeComponent } from './public';
 import { HeaderComponent, FooterComponent } from './public/shared';
+import { ProductDetailComponent } from './products';
+import { ProductListService, ProductDetailService } from './core/services';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,15 @@ import { HeaderComponent, FooterComponent } from './public/shared';
       logOnly: environment.production 
     })
   ],
-  providers: [  ],
+  providers: [ 
+    ProductListService, 
+    ProductDetailService 
+  ],
+  
+  // dynamic components
+  entryComponents: [
+    ProductDetailComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

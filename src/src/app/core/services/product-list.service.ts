@@ -15,7 +15,7 @@ export class ProductListService {
     this._env = environment as CustomSettings;
   }
 
-  get onePageProducts() {
+  get allProducts() {
     return this.store.pipe(select(fromProducts.selectProducts));
   }
 
@@ -25,5 +25,5 @@ export class ProductListService {
 
   initialLoad() {
     this.store.dispatch(ProductsActions.loadProducts());
-  }  
+  }
 }

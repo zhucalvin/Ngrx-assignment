@@ -9,6 +9,7 @@ import { ProductsEffects } from '../core/effects';
 import * as fromProducts from '../core/reducers';
 import { SharedModule } from '../shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProductsRoutingModule,
     NgxPaginationModule,
     SharedModule,
+    NgbModule,
     /**
      * StoreModule.forFeature is used for composing state
      * from feature modules. These modules can be loaded
