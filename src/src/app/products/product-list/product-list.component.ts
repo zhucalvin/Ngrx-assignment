@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { Coffee, PageHeader } from 'src/app/core/models';
 import { ProductListService } from 'src/app/core/services';
+import { environment } from 'src/environments/environment';
+import { CustomSettings } from '../../core/models';
 
 @Component({
   selector: 'app-product-list',
@@ -15,9 +16,13 @@ export class ProductListComponent implements OnInit {
   public productList: Coffee[] = [];
   public page: number = 1;
   public count: number = 0;
-  public tableSize: number = 10;
+  public tableSize: number = 0;
   
-  constructor(private prodService: ProductListService) {   }
+  private _env: CustomSettings;
+  constructor(private prodService: ProductListService) {  
+    this._env = environment as CustomSettings;
+    this.tableSize = this._env.application.productsPerPage;
+   }
 
   ngOnInit(): void {
     this.retrieveList();
