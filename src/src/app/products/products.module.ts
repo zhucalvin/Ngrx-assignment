@@ -9,6 +9,7 @@ import { ProductsEffects } from '../core/effects';
 import * as fromProducts from '../core/reducers';
 import { SharedModule } from '../shared/shared.module';
 import { PaginationComponent } from './pagination/pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PaginationComponent } from './pagination/pagination.component';
   imports: [
     CommonModule,
     ProductsRoutingModule,
+    NgxPaginationModule,
     SharedModule,
     /**
      * StoreModule.forFeature is used for composing state

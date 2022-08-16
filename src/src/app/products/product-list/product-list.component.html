@@ -13,7 +13,7 @@
                 </tr>    
             </thead>
             <tbody>
-                <tr *ngFor='let product of retrievedProducts$ | async'>
+                <tr *ngFor='let product of productList | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: count }; let i = index '>
                     <td>{{ product.id }}</td>
                     <td>{{ product.blend_name }}</td>
                     <td>{{ product.origin }}</td>
@@ -27,7 +27,11 @@
 </div>
 <div class="row">
     <div class="col">
-        <app-pagination></app-pagination>
+        <pagination-controls
+        previousLabel="Prev"
+        nextLabel = "Next"
+        (pageChange) = "onTableDataChange($event)"
+        ></pagination-controls>
     </div>
 </div>
 

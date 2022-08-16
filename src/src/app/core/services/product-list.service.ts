@@ -24,7 +24,8 @@ export class ProductListService {
   }
 
   get onePageProducts() {
-    return this.store.pipe(select(fromProducts.selectProducts)).pipe(map(data => data.slice(this.productsGridState.pageStart, this.productsGridState.pageSize)));
+    return this.store.pipe(select(fromProducts.selectProducts));
+    //return this.store.pipe(select(fromProducts.selectProducts)).pipe(map(data => data.slice(this.productsGridState.pageStart, this.productsGridState.pageSize)));
   }
 
   get currentPageNumber() {
